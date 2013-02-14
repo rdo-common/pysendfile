@@ -1,6 +1,6 @@
 Name:           pysendfile
 Version:        2.0.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Python interface to the sendfile(2) system call
 
 License:        MIT
@@ -45,6 +45,9 @@ PYTHONPATH="$RPM_BUILD_ROOT%{python_sitearch}" %{__python} test/test_sendfile.py
 
 
 %changelog
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.0-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
