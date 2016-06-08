@@ -1,14 +1,20 @@
-Name:           pysendfile
-Version:        2.0.0
-Release:        10%{?dist}
-Summary:        Python interface to the sendfile(2) system call
+%global srcname pysendfile
+%global sum Python interface to the sendfile(2) system call
+
+Name:           %{srcname}
+Version:        2.0.1
+Release:        1%{?dist}
+Summary:        %{sum}
 
 License:        MIT
-URL:            http://code.google.com/p/pysendfile/
-Source0:        http://pysendfile.googlecode.com/files/pysendfile-%{version}.tar.gz
+URL:            https://github.com/giampaolo/pysendfile
+Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
+BuildRequires:  python2-setuptools
+
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
 
 %{?filter_setup:
 %filter_provides_in %{python_sitearch}
@@ -22,29 +28,72 @@ to the fact that all of the copying of data between the two descriptors is done
 entirely by the kernel, with no copying of data into user-space buffers. This is
 particularly useful when sending a file over a socket (e.g. FTP). 
 
+
+%package -n python2-%{srcname}
+Summary:  %{sum}
+%{?python_provide:%python_provide python2-%{srcname}}
+
+%description -n python2-%{srcname}
+sendfile(2) is a system call which provides a "zero-copy" way of copying data
+from one file descriptor to another (a socket). The phrase "zero-copy" refers
+to the fact that all of the copying of data between the two descriptors is done
+entirely by the kernel, with no copying of data into user-space buffers. This is
+particularly useful when sending a file over a socket (e.g. FTP).
+This is Python 2 version.
+
+
+%package -n python3-%{srcname}
+Summary:  %{sum}
+%{?python_provide:%python_provide python3-%{srcname}}
+
+%description -n python3-%{srcname}
+sendfile(2) is a system call which provides a "zero-copy" way of copying data
+from one file descriptor to another (a socket). The phrase "zero-copy" refers
+to the fact that all of the copying of data between the two descriptors is done
+entirely by the kernel, with no copying of data into user-space buffers. This is
+particularly useful when sending a file over a socket (e.g. FTP). 
+This is Python 3 version.
+
+
 %prep
 %setup -q
 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
+%py2_build
+%py3_build
 
 
 %install
-%{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+%py2_install
+%py3_install
 
 
 %check
-PYTHONPATH="$RPM_BUILD_ROOT%{python_sitearch}" %{__python} test/test_sendfile.py
+PYTHONPATH="$RPM_BUILD_ROOT%{python2_sitearch}" %{__python2} test/test_sendfile.py
+PYTHONPATH="$RPM_BUILD_ROOT%{python3_sitearch}" %{__python3} test/test_sendfile.py
 
 
-%files
-%doc README LICENSE
-%attr(755, root, root) %{python_sitearch}/sendfile.so
-%{python_sitearch}/pysendfile-%{version}-*.egg-info
+%files -n python2-%{srcname}
+%doc README.rst
+%license LICENSE
+%attr(755, root, root) %{python2_sitearch}/sendfile.so
+%{python2_sitearch}/pysendfile-%{version}-*.egg-info
+
+
+%files -n python3-%{srcname}
+%doc README.rst
+%license LICENSE
+%attr(755, root, root) %{python3_sitearch}/sendfile.*.so
+%{python3_sitearch}/pysendfile-%{version}-*.egg-info
 
 
 %changelog
+* Wed Jun 08 2016 Dominika Krejci <dkrejci@redhat.com> - 2.0.1 - 1
+- Add Python 3
+- Upgrade version to 2.0.1
+- Update source and URL (project moved to GitHub)
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.0-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
