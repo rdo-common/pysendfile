@@ -3,7 +3,7 @@
 
 Name:           %{srcname}
 Version:        2.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -32,6 +32,9 @@ particularly useful when sending a file over a socket (e.g. FTP).
 %package -n python2-%{srcname}
 Summary:  %{sum}
 %{?python_provide:%python_provide python2-%{srcname}}
+# Note: package was renamed, it needs to provides/obsoletes old name
+Provides: %{srcname} = %{version}-%{release}
+Obsoletes: %{srcname} < 2.0.1-1
 
 %description -n python2-%{srcname}
 sendfile(2) is a system call which provides a "zero-copy" way of copying data
@@ -89,6 +92,9 @@ PYTHONPATH="$RPM_BUILD_ROOT%{python3_sitearch}" %{__python3} test/test_sendfile.
 
 
 %changelog
+* Tue Jul  5 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 2.0.1-2
+- Provides/Obsoletes old name
+
 * Wed Jun 08 2016 Dominika Krejci <dkrejci@redhat.com> - 2.0.1 - 1
 - Add Python 3
 - Upgrade version to 2.0.1
