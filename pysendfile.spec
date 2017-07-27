@@ -3,7 +3,7 @@
 
 Name:           %{srcname}
 Version:        2.0.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -92,6 +92,9 @@ PYTHONPATH="$RPM_BUILD_ROOT%{python3_sitearch}" %{__python3} test/test_sendfile.
 
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Fri Jul 07 2017 Igor Gnatenko <ignatenko@redhat.com> - 2.0.1-6
 - Rebuild due to bug in RPM (RHBZ #1468476)
 
