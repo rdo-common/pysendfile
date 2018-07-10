@@ -10,6 +10,7 @@ License:        MIT
 URL:            https://github.com/giampaolo/pysendfile
 Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
 
+BuildRequires:  gcc
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 
