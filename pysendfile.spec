@@ -3,7 +3,7 @@
 
 Name:           %{srcname}
 Version:        2.0.1
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -65,6 +65,9 @@ PYTHONPATH="$RPM_BUILD_ROOT%{python3_sitearch}" %{__python3} test/test_sendfile.
 
 
 %changelog
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 2.0.1-15
+- Rebuilt for Python 3.8
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.1-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
