@@ -1,3 +1,5 @@
+%{?python_enable_dependency_generator}
+
 %global srcname pysendfile
 %global sum Python interface to the sendfile(2) system call
 
@@ -16,7 +18,7 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
 %{?filter_setup:
-%filter_provides_in %{python_sitearch}
+%filter_provides_in %{python3_sitearch}
 %filter_setup
 }
 
